@@ -1,9 +1,11 @@
 package devandroid.julian.calculadoradenotas;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,27 +38,38 @@ public class MainActivity extends AppCompatActivity {
 
         textViewAprovado = findViewById(R.id.text_view_aprovacao);
         btnCalcular = findViewById(R.id.btn_calcular);
+
         btnCalcular.setOnClickListener(view -> {
 
-            int nota1 = Integer.parseInt(n1.getText().toString());
-            int nota2 = Integer.parseInt(n2.getText().toString());
-            int nota3 = Integer.parseInt(n3.getText().toString());
-            int nota4 = Integer.parseInt(n4.getText().toString());
-            int numero_faltas = Integer.parseInt(numeroFaltas.getText().toString());
-
-            int media = (nota1 + nota2 + nota3 + nota4) / 4;
-
-            if(numero_faltas <= 20 && media >= 5){
-                textViewAprovado.setText("Aluno foi Aprovado \nMédia final: "+media);
-                textViewAprovado.setTextColor(getColor(R.color.green));
-            } else if (numero_faltas > 20 ) {
-                textViewAprovado.setText("Aluno foi Reprovado por Faltas \nMédia final: "+media);
-                textViewAprovado.setTextColor(getColor(R.color.red));
+            if (TextUtils.isEmpty(n1.getText().toString()) ||
+                    TextUtils.isEmpty(n2.getText().toString()) ||
+                            TextUtils.isEmpty(n3.getText().toString())||
+                                    TextUtils.isEmpty(n4.getText().toString())||
+                                            TextUtils.isEmpty(numeroFaltas.getText().toString())){
+                textViewAprovado.setText("");
+                Toast.makeText(this, "Insira todos os campos", Toast.LENGTH_SHORT).show();
             }else {
-                textViewAprovado.setText("Aluno foi Reprovado por Nota \nMédia final: "+media);
-                textViewAprovado.setTextColor(getColor(R.color.red));
-            }
 
+                int nota1 = Integer.parseInt(n1.getText().toString());
+                int nota2 = Integer.parseInt(n2.getText().toString());
+                int nota3 = Integer.parseInt(n3.getText().toString());
+                int nota4 = Integer.parseInt(n4.getText().toString());
+                int numero_faltas = Integer.parseInt(numeroFaltas.getText().toString());
+
+                int media = (nota1 + nota2 + nota3 + nota4) / 4;
+
+                if(numero_faltas <= 20 && media >= 5){
+                    textViewAprovado.setText("Aluno foi Aprovado \nMédia final: "+media);
+                    textViewAprovado.setTextColor(getColor(R.color.green));
+                } else if (numero_faltas > 20 ) {
+                    textViewAprovado.setText("Aluno foi Reprovado por Faltas \nMédia final: "+media);
+                    textViewAprovado.setTextColor(getColor(R.color.red));
+                }else {
+                    textViewAprovado.setText("Aluno foi Reprovado por Nota \nMédia final: "+media);
+                    textViewAprovado.setTextColor(getColor(R.color.red));
+                }
+
+            }
 
         });
 
