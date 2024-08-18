@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#bdbdbd</color>
+    <color name="grey_dark">#6A6A6A</color>
+    <color name="green">#10AA1F</color>
+    <color name="red">#C11120</color>
 </resources>
